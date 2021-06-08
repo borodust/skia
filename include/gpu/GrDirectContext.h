@@ -251,17 +251,6 @@ public:
     void freeGpuResources();
 
     /**
-     * Purge GPU resources that haven't been used in the past 'msNotUsed' milliseconds or are
-     * otherwise marked for deletion, regardless of whether the context is under budget.
-     */
-    void performDeferredCleanup(std::chrono::milliseconds msNotUsed);
-
-    // Temporary compatibility API for Android.
-    void purgeResourcesNotUsedInMs(std::chrono::milliseconds msNotUsed) {
-        this->performDeferredCleanup(msNotUsed);
-    }
-
-    /**
      * Purge unlocked resources from the cache until the the provided byte count has been reached
      * or we have purged all unlocked resources. The default policy is to purge in LRU order, but
      * can be overridden to prefer purging scratch resources (in LRU order) prior to purging other
